@@ -76,7 +76,13 @@ HYDROSYNC AI delivers quantifiable public safety, economic, and environmental im
 
 ---
 
-### Field 7: Link to all open-source resources used *
+### Field 7: Github Link of your Project / Link of your Zip File *
+**Direct GitHub Repository URL**:
+`https://github.com/gurup7029-coder/hydrosync-ai`
+
+---
+
+### Field 8: Link to all open-source resources used *
 *(Character count: 524 / 1024 characters)*
 
 ```text
