@@ -1,0 +1,34 @@
+# Dedicated Dockerfile for IBM LinuxONE / Linux on IBM Z (s390x Architecture)
+# Base image from official s390x verified Python registry
+FROM s390x/python:3.11-slim
+
+LABEL maintainer="HYDROSYNC AI Team"
+LABEL target_platform="IBM LinuxONE / Linux on IBM Z"
+LABEL architecture="s390x"
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+# Install CPU-optimized wheel binaries
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/ ./backend/
+COPY ml/ ./ml/
+COPY data/ ./data/
+
+ENV HOST=0.0.0.0
+ENV PORT=8000
+ENV ENVIRONMENT=production
+ENV IS_LINUXONE_TARGET=true
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=20s --timeout=4s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/api/health || exit 1
+
+CMD ["python", "-m", "uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]

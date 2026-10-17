@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-dark: #070913;
+    --bg-card: rgba(16, 20, 38, 0.7);
+    --border-glow: rgba(168, 85, 247, 0.25);
+    --accent-violet: #a855f7;
+    --accent-cyan: #06b6d4;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #060813;
+    color: #e2e8f0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Glassmorphism & Custom Accents */
+.glass-panel {
+  background: rgba(13, 17, 34, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-glow {
+  background: rgba(15, 20, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.15), inset 0 0 15px rgba(6, 182, 212, 0.05);
+}
+
+.glass-card {
+  background: rgba(18, 24, 46, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 4px 20px -2px rgba(168, 85, 247, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252b48;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b436e;
+}
+
+/* Pulse Glow Keyframes */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* Leaflet Dark Theme Overrides */
+.leaflet-container {
+  background: #090c1a !important;
+  border-radius: 0.75rem;
+  z-index: 10;
+}
+
+.leaflet-tile {
+  filter: brightness(0.7) invert(1) contrast(3) hue-rotate(200deg) saturate(0.35) !important;
+}
+
+.leaflet-bar a {
+  background-color: #12182d !important;
+  color: #c4b5fd !important;
+  border-bottom: 1px solid #282f4d !important;
+}
